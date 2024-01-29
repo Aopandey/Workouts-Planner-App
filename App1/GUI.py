@@ -1,4 +1,3 @@
-import functions
 import PySimpleGUI as zx
 
 label = zx.Text("Type in your Workouts")
