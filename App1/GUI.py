@@ -1,6 +1,11 @@
 import functions
 import PySimpleGUI as zx
 import time
+import os
+
+if not os.path.exists('Workouts.txt'):
+    with open('Workouts.txt', 'w') as file:
+        pass
 
 zx.theme('DarkBlack')
 
@@ -8,11 +13,12 @@ clock = zx.Text('',key='clock')
 label = zx.Text("Type in your Workouts")
 input_box = zx.InputText(tooltip="Enter an exercise",
                          key="Exercise")
-add_button = zx.Button("Add")
+add_button = zx.Button(image_source='add.png', tooltip='Add an exercise', key='Add')
 list_box = zx.Listbox(values=functions.get_workouts(), key='Exercises',
                       enable_events=True, size=[38, 10])
 edit_button = zx.Button("Edit")
-complete_button = zx.Button("Complete")
+complete_button = zx.Button(image_source='complete.png', tooltip='Click on an exercise that you completed',
+                            key='Complete')
 exit_button = zx.Button("Exit")
 
 window = zx.Window('My Workout Planner App',
