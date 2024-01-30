@@ -8,9 +8,14 @@ add_button = zx.Button("Add")
 list_box = zx.Listbox(values=functions.get_workouts(), key='Exercises',
                       enable_events=True, size=[38, 8])
 edit_button = zx.Button("Edit")
+complete_button = zx.Button("Complete")
+exit_button = zx.Button("Exit")
 
 window = zx.Window('My Workout Planner App',
-                   layout=[[label], [input_box, add_button], [list_box, edit_button]],
+                   layout=[[label],
+                           [input_box, add_button],
+                           [list_box, edit_button, complete_button],
+                           [exit_button]],
                    font=('Times new roman', 12))
 
 while True:
@@ -34,6 +39,15 @@ while True:
             workouts[index] = new_exercises
             functions.write_workouts(workouts)
             window['Exercises'].update(values=workouts)
+        case 'Complete':
+            Exercise_to_complete = values['Exercises'][0]
+            workouts = functions.get_workouts()
+            workouts.remove(Exercise_to_complete)
+            functions.write_workouts(workouts)
+            window['Exercises'].update(values=workouts)
+            window['Exercise'].update(value='')
+        case 'Exit':
+            break
         case 'Exercises':
             window['Exercise'].update(value=values['Exercises'][0])
         case zx.WIN_CLOSED:
